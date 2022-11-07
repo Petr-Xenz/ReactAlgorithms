@@ -1,1 +1,1 @@
-# ReactAlgorithms
+Visualization of the different algorithms in a react app
