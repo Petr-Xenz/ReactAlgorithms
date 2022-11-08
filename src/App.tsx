@@ -1,47 +1,49 @@
 import './App.css';
-import React from 'react';
-import { useAutoAnimate } from '@formkit/auto-animate/react'
+import { useState, useEffect } from 'react';
+import ArraySort from './ArraySortComponent';
+import GetSortOperations from './InsertionSort';
 
 function randomInt(min: number, max: number) { // min and max included 
     return Math.floor(Math.random() * (max - min + 1) + min)
-  }
+}
+
+const initial = Array(15)
+    .fill(0)
+    .map(_ => randomInt(0, 999))
+    .map((v, i) => ({id: i, value: v}));
+
+    const sortCommands = GetSortOperations(initial);
 
 function App() {
 
-    const [parent] = useAutoAnimate(/* optional config */) as any
+    const [data, setData] = useState(() => 
+    {
+        return initial;
+    });
 
-    const [items, setItems] = React.useState(Array(randomInt(10, 20))
-        .fill(0)
-        .map(_ => randomInt(0, 999))
-        .map((n, i) => ({ value: n, id: i })));
+    useEffect(() => {
+    const interval = setInterval(() => setData(() => 
+        {
 
-    const shuffle = () => setItems(Array(randomInt(10, 20))
-        .fill(0)
-        .map(_ => randomInt(0, 999))
-        .map((n, i) => ({ value: n, id: i }))
-        .reverse());
+            if (sortCommands.length == 0)
+                return data;
 
-    const itemStyle: React.CSSProperties = {
-        margin: 5,
-        padding: 5,
-        borderColor: 'darkgrey',
-        borderStyle: 'solid',
-        borderWidth: 0.5,
-    }
+            var command = sortCommands.pop()!;
+            const temp = data[command.new];
+            data[command.new] = data[command.old];
+            data[command.old] = temp;
 
-    const containerStyle: React.CSSProperties = {
-        height: "100vh",
-        display: "flex",
-        flexDirection: "row",
-        justifyContent: "center",
-        alignItems: "center",
-        flexWrap: 'wrap',
-    }
+            return [...data];
+        }), 750);
+
+        return () => {
+            clearInterval(interval);
+        };
+    }, []);
 
   return (
-    <div style={containerStyle} ref={parent}>
-        {items.map(p => <div key={p.id} style={itemStyle}>{p.value}</div>)}
-        <button onClick={shuffle}></button>
+    <div>
+        <ArraySort data={data}/>
     </div>
   );
 }
