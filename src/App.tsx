@@ -1,24 +1,38 @@
-import logo from './logo.svg';
 import './App.css';
+import React from 'react';
+
+function randomInt(min: number, max: number) { // min and max included 
+    return Math.floor(Math.random() * (max - min + 1) + min)
+  }
 
 function App() {
+
+    const items = Array(randomInt(10, 20))
+        .fill(0)
+        .map(_ => randomInt(0, 999))
+        .map((n, i) => ({ value: n, id: i }));
+
+    const itemStyle: React.CSSProperties = {
+        margin: 5,
+        padding: 5,
+        borderColor: 'darkgrey',
+        borderStyle: 'solid',
+        borderWidth: 0.5,
+    }
+
+    const containerStyle: React.CSSProperties = {
+        height: "100vh",
+        display: "flex",
+        flexDirection: "row",
+        justifyContent: "center",
+        alignItems: "center",
+        flexWrap: 'wrap',
+    }
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+        <div style={containerStyle}>
+            {items.map(p => <div key={p.id} style={itemStyle}>{p.value}</div>)}
+        </div>
   );
 }
 
