@@ -27,7 +27,7 @@ function ArraySortManager(props: ArraySortManagerProp) {
         
         if (sortCommands.length === 0 || data.length === 0)
             return;
-            
+
         const interval = setInterval(() => setData(() => 
             {
                 if (sortCommands.length === 0)
@@ -44,7 +44,7 @@ function ArraySortManager(props: ArraySortManagerProp) {
         return () => {
             clearInterval(interval);
         };
-    }, []);
+    }, [data, sortCommands]);
 
     return <ArraySort data={data}/>
 }
