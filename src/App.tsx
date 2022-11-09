@@ -15,16 +15,16 @@ function App() {
     const algSelectionContainerStyle : CSSProperties = {
         display: 'flex',
         flexDirection: 'column',
-        gap: 5,
+        gap: 10,
         backgroundColor: 'blueviolet',
         alignItems: 'stretch',
         justifyContent: 'start',
-        padding: 10,
-        flexGrow: 0.2,
+        padding: 20,
     }
 
     const algContainerStyle : CSSProperties = {
         height: '100vh',
+        width: '100vw',
     }
 
     const [algComponent, setComponent] = useState(() => 

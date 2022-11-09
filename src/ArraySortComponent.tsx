@@ -17,15 +17,16 @@ function ArraySort(props: ArraySortProp) {
         borderColor: 'darkgrey',
         borderStyle: 'solid',
         borderWidth: 0.5,
+        borderRadius: 5,
+        fontSize: '2vw',
     }
 
     const containerStyle: React.CSSProperties = {
         height: "100vh",
         display: "flex",
         flexDirection: "row",
-        justifyContent: "center",
         alignItems: "center",
-        flexWrap: 'wrap',
+        justifyContent: "center",
     }
 
   return (
