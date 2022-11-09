@@ -1,6 +1,5 @@
 import './App.css';
-import { useState, useEffect, CSSProperties, ReactElement } from 'react';
-import ArraySort from './ArraySortComponent';
+import { useState, CSSProperties, ReactElement } from 'react';
 import GetSortOperations from './InsertionSort';
 import ArraySortManager from './ArraySortManagerComponent';
 

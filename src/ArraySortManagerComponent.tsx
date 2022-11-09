@@ -24,18 +24,22 @@ function ArraySortManager(props: ArraySortManagerProp) {
     });
 
     useEffect(() => {
-    const interval = setInterval(() => setData(() => 
-        {
-            if (sortCommands.length == 0)
-                return data;
+        
+        if (sortCommands.length === 0 || data.length === 0)
+            return;
+            
+        const interval = setInterval(() => setData(() => 
+            {
+                if (sortCommands.length === 0)
+                    return data;
 
-            var command = sortCommands.pop()!;
-            const temp = data[command.new];
-            data[command.new] = data[command.old];
-            data[command.old] = temp;
+                var command = sortCommands.pop()!;
+                const temp = data[command.new];
+                data[command.new] = data[command.old];
+                data[command.old] = temp;
 
-            return [...data];
-        }), 750);
+                return [...data];
+            }), 750);
 
         return () => {
             clearInterval(interval);
