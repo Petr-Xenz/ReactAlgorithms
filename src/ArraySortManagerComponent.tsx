@@ -16,37 +16,35 @@ const initial = Array(15)
 
 function ArraySortManager(props: ArraySortManagerProp) {
 
-    const sortCommands = props.getSortOperations(initial);
-
-    const [data, setData] = useState(() => 
+    const [state, setData] = useState(() => 
     {
-        return initial;
+        const sortCommands = props.getSortOperations(initial);
+        return { data: initial, sortCommands};
     });
 
     useEffect(() => {
-        
-        if (sortCommands.length === 0 || data.length === 0)
-            return;
-
-        const interval = setInterval(() => setData(() => 
+            const interval = setInterval(() => setData(() => 
             {
-                if (sortCommands.length === 0)
-                    return data;
+                const { data, sortCommands }  = state;
 
-                var command = sortCommands.pop()!;
+                if (state.sortCommands.length === 0)
+                    return { data: data, sortCommands: sortCommands };
+
+                const command = sortCommands.pop()!;
+                
                 const temp = data[command.new];
                 data[command.new] = data[command.old];
                 data[command.old] = temp;
 
-                return [...data];
+                return { data: data, sortCommands: sortCommands };
             }), 750);
 
         return () => {
             clearInterval(interval);
         };
-    }, [data, sortCommands]);
+    }, [state]);
 
-    return <ArraySort data={data}/>
+    return <ArraySort data={state.data}/>
 }
 
 export default ArraySortManager;
