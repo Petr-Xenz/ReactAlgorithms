@@ -6,6 +6,19 @@ html, body, .container {
     height: 100%;
 }
 
+button {
+    background-color: lightsteelblue;
+    border-radius: 5px;
+    border-width: 0px;
+    font-size: 16pt;
+}
+
+button:hover {
+    background-color: steelblue;
+    color: seashell;
+    transition: 0.2s;
+}
+
 .container {
     display: -webkit-flexbox;
     display: -ms-flexbox;
