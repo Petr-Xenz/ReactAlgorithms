@@ -1,6 +1,7 @@
 import './App.css';
 import { useState, CSSProperties, ReactElement } from 'react';
-import GetSortOperations from './InsertionSort';
+import * as insertionSort from './InsertionSort';
+import * as quickSort from './QuickSort';
 import ArraySortManager from './ArraySortManagerComponent';
 
 function App() {
@@ -28,7 +29,7 @@ function App() {
 
     const [algComponent, setComponent] = useState(() => 
     {
-        return <ArraySortManager getSortOperations={GetSortOperations}/>
+        return <ArraySortManager key={1} getSortOperations={insertionSort.default}/>
     });
 
   return (
@@ -47,14 +48,14 @@ function App() {
 
     const insertion = 
         <button 
-            onClick={() => setComponent(() => <ArraySortManager getSortOperations={GetSortOperations}/>)}>
+            onClick={() => setComponent(() => <ArraySortManager key={1} getSortOperations={insertionSort.default}/>)}>
             Insertion sort
         </button>
     result.push(insertion);
 
     const quick = 
     <button 
-        onClick={() => setComponent(() => <div/>)}>
+        onClick={() => setComponent(() => <ArraySortManager key={2} getSortOperations={quickSort.default}/>)}>
         Quick sort
     </button>
     result.push(quick);
